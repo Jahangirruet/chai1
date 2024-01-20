@@ -8,13 +8,16 @@ dotenv.config({
   path: "./env",
 });
 
+const PORT = process.env.PORT || 8000;
 connectDB()
+  .then(() => {
+    // Code to execute after successful database connection
+    app.listen(PORT, () => {
+      console.log("server listening on port " + process.env.PORT);
+    });
+  })
+  .catch((error) => {
+    // Code to handle errors during database connection
+    console.error("Error connecting to the database:", error.message);
+  });
 
-  // .then(()=>{
-  //   app.listen(process.env.PORT||8000,()=>{
-  //     console.log("server listening on port: " + process.env.PORT);
-  //   });
-  // })
-  // .catch((err) => {
-  //   console.log("MONGO DB CONNECTION fAILD: ", err.message);
-  // });
